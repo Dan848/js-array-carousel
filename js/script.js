@@ -30,8 +30,7 @@ slider.innerHTML += slides;
 thumbnails.innerHTML += thumb;
 
 //Rendo già visibile la prima il primo elemento dell'array assegnando la classe "active"
-document.querySelectorAll(".thumb")[imgIndex].classList.add("active");
-document.querySelectorAll(".slide")[imgIndex].classList.add("active");
+addActive ();
 
 //Collego all'evento click dei button le rispettive funzioni
 const prev = document.querySelector(".prev");
@@ -43,8 +42,7 @@ next.addEventListener("click", goNext);
 
 //BUTTON NEXT
 function goNext () {
-    document.querySelectorAll(".thumb")[imgIndex].classList.remove("active");
-    document.querySelectorAll(".slide")[imgIndex].classList.remove("active");
+    removeActive ();
     //Se imgIndex è pari al numero della posizione dell'ultimo elemento dell'array, riportalo al primo (che sarà sempre 0)
     if (imgIndex === images.length - 1) {
         imgIndex = 0;
@@ -53,14 +51,12 @@ function goNext () {
     else {
         imgIndex ++;
     }
-    document.querySelectorAll(".thumb")[imgIndex].classList.add("active");
-    document.querySelectorAll(".slide")[imgIndex].classList.add("active");
+    addActive ();
 }
 
 //BUTTON PREV
 function goPrev () {
-    document.querySelectorAll(".thumb")[imgIndex].classList.remove("active");
-    document.querySelectorAll(".slide")[imgIndex].classList.remove("active");
+    removeActive ();
     //Se imgIndex è pari al numero della posizione del primo elemento dell'array, riportalo all'ultimo
     if (imgIndex === 0) {
         imgIndex = images.length - 1;
@@ -69,6 +65,15 @@ function goPrev () {
     else {
         imgIndex --;
     }
+    addActive ();
+}
+
+function removeActive () {
+    document.querySelectorAll(".thumb")[imgIndex].classList.remove("active");
+    document.querySelectorAll(".slide")[imgIndex].classList.remove("active");
+}
+
+function addActive () {
     document.querySelectorAll(".thumb")[imgIndex].classList.add("active");
     document.querySelectorAll(".slide")[imgIndex].classList.add("active");
 }
