@@ -47,12 +47,14 @@ function goPrev () {
 }
 
 function removeActive () {
+    document.querySelectorAll(".carousel-subtitle")[imgIndex].classList.remove("active")
     document.querySelectorAll(".carousel-title")[imgIndex].classList.remove("active");
     document.querySelectorAll(".thumb")[imgIndex].classList.remove("active");
     document.querySelectorAll(".slide")[imgIndex].classList.remove("active");
 }
 
 function addActive () {
+    document.querySelectorAll(".carousel-subtitle")[imgIndex].classList.add("active")
     document.querySelectorAll(".carousel-title")[imgIndex].classList.add("active");
     document.querySelectorAll(".thumb")[imgIndex].classList.add("active");
     document.querySelectorAll(".slide")[imgIndex].classList.add("active");
@@ -68,7 +70,8 @@ function stopAutoplay () {
 }
 
 function addImages(element) {
-    carousel.parentNode.insertBefore(createChild("h1", ["carousel-title", "mb-5"], `${element.imgName}`), carousel);
+    carousel.parentNode.insertBefore(createChild("h1", ["carousel-title", "mb-2"], `${element.imgName}`), carousel);
+    carousel.parentNode.insertBefore(createChild("p", ["carousel-subtitle", "mb-5", "fs-"], `${element.subTitle}`), carousel);
     slides += `<div class="slide">
     <img src="./${element.src}" alt="Carosello-${element.imgName}"></div>`;
     thumb += `<div class="thumb">
@@ -79,23 +82,28 @@ function addImages(element) {
 const images = [
     {
         src: `img/01.webp`,
-        imgName: `Spiderman dal dubbio colore`
+        imgName: `Spider-man`,
+        subTitle: `Dal dubbio colore`
     },
     {
         src: `img/02.webp`,
-        imgName: `Ratchet & Clank Rift Apart: SOLO €80 su Amazon...solo eh`
+        imgName: `Ratchet & Clank Rift Apart`,
+        subTitle: `Solo €80 su Amazon...solo eh`
     },
     {
         src: `img/03.webp`,
-        imgName: `Credo sia Fortnite, non ci gioco...ma perché c'è Darth Fener`
+        imgName: `Credo sia Fortnite`,
+        subTitle: `Non lo so, non ci gioco...ma perché c'è Darth Fener?`
     },
     {
         src: `img/04.webp`,
-        imgName: `Stray, bellissimo gioco, bellissimo gatto`
+        imgName: `Stray`,
+        subTitle: `Bellissimo gioco, bellissimo gatto`
     },
     {
         src: `img/05.webp`,
-        imgName: `Gli Avengers che hai ordinato su Wish... volevo dire della Marvel`
+        imgName: `Gli Avengers`,
+        subTitle: `...che hai ordinato su Wish... volevo dire della Marvel`
     }
 ];
 //Associo una variabile css alla lunghezza dell'array per suddividere equamente le immagini nel box thumbnails

@@ -17,11 +17,11 @@ img {
     display: none;
 }
 
-.carousel-title {
+.carousel-title,.carousel-subtitle {
     display: none;
 }
 
-.carousel-title.active {
+.carousel-title.active,.carousel-subtitle.active {
     display: block;
 }
 
