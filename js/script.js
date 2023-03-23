@@ -1,44 +1,6 @@
 //Dato un array contenente una lista di cinque immagini, creare un carosello.
 
-//Creo l'array contenente il nome del file img
-const images = [
-    `img/01.webp`,
-    `img/02.webp`,
-    `img/03.webp`,
-    `img/04.webp`,
-    `img/05.webp`
-];
-//Associo una variabile css alla lunghezza dell'array per suddividere equamente le immagini nel box thumbnails
-document.documentElement.style.setProperty('--images-number', images.length);
-
-//VARIABILI
-const slider = document.querySelector(".slider");
-const thumbnails = document.querySelector(".thumbnails");
-let slides = ``;
-let thumb = ``;
-let imgIndex = 0;
-
-//Ciclo For per inserire automaticamente le immagini nelle rispettive variabili...
-for (let i = 0; i < images.length; i++) {
-    slides += `<div class="slide">
-    <img src="./${images[i]}" alt="Carosello-${i}"></div>`;
-    thumb += `<div class="thumb">
-    <img src="./${images[i]}" alt="Thumbnail-${i}"></div>`;
-}
-//...che andranno poi "aggiunte" ai rispettivi container
-slider.innerHTML += slides;
-thumbnails.innerHTML += thumb;
-
-//Rendo già visibile la prima il primo elemento dell'array assegnando la classe "active"
-addActive ();
-
-//Collego all'evento click dei button le rispettive funzioni
-const prev = document.querySelector(".prev");
-const next = document.querySelector(".next");
-prev.addEventListener("click", goPrev);
-next.addEventListener("click", goNext);
-
-//Gestisco la classe active "legandola" alla variabile imgIndex che controllo con le relative funzioni legate ai Button
+//FUNZIONI
 
 //BUTTON NEXT
 function goNext () {
@@ -77,3 +39,59 @@ function addActive () {
     document.querySelectorAll(".thumb")[imgIndex].classList.add("active");
     document.querySelectorAll(".slide")[imgIndex].classList.add("active");
 }
+
+let intervalGoNext;
+function startAutoplay() {
+    intervalGoNext = setInterval (goNext, 3000);
+}
+
+function stopAutoplay () {
+    clearInterval (intervalGoNext);
+}
+
+//Creo l'array contenente il nome del file img
+const images = [
+    `img/01.webp`,
+    `img/02.webp`,
+    `img/03.webp`,
+    `img/04.webp`,
+    `img/05.webp`
+];
+//Associo una variabile css alla lunghezza dell'array per suddividere equamente le immagini nel box thumbnails
+document.documentElement.style.setProperty('--images-number', images.length);
+
+//VARIABILI PER CONTROLLARE GLI ELEMENTI DEL DOM
+const slider = document.querySelector(".slider");
+const thumbnails = document.querySelector(".thumbnails");
+const carousel = document.querySelector(".full-carousel");
+let slides = ``;
+let thumb = ``;
+let imgIndex = 0;
+
+//Ciclo For per inserire automaticamente le immagini nelle rispettive variabili...
+for (let i = 0; i < images.length; i++) {
+    slides += `<div class="slide">
+    <img src="./${images[i]}" alt="Carosello-${i}"></div>`;
+    thumb += `<div class="thumb">
+    <img src="./${images[i]}" alt="Thumbnail-${i}"></div>`;
+}
+//...che andranno poi "aggiunte" ai rispettivi container
+slider.innerHTML += slides;
+thumbnails.innerHTML += thumb;
+
+//Rendo già visibile la prima il primo elemento dell'array assegnando la classe "active"
+addActive ();
+
+//Collego all'evento click dei button le rispettive funzioni
+const prev = document.querySelector(".prev");
+const next = document.querySelector(".next");
+prev.addEventListener("click", goPrev);
+next.addEventListener("click", goNext);
+
+//Gestisco la classe active "legandola" alla variabile imgIndex che controllo con le relative funzioni legate ai Button
+
+//Collego all'evento mouse Over lo stop all'autoplay...
+carousel.addEventListener("mouseover", stopAutoplay);
+carousel.addEventListener("mouseout", startAutoplay);
+
+startAutoplay(); 
