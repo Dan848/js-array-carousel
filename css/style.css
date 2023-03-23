@@ -17,6 +17,14 @@ img {
     display: none;
 }
 
+.carousel-title {
+    display: none;
+}
+
+.carousel-title.active {
+    display: block;
+}
+
 .slide.active {
     display: block;
 }
